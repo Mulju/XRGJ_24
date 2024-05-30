@@ -5,6 +5,10 @@ public class RandomPointOnMesh : MonoBehaviour
 {
     public MeshCollider meshColl;
 
+    public bool bangGetPoint = true;
+
+
+    public List<Vector3> debugPoints;
     private Mesh mesh;
     private float[] sizes;
     private float[] cumulativeSizes;
@@ -22,6 +26,27 @@ public class RandomPointOnMesh : MonoBehaviour
         {
             total += sizes[i];
             cumulativeSizes[i] = total;
+        }
+    }
+
+    void Update()
+    {
+
+        //click the checkbox to generate a point, and have it shown in a debug gizmo.
+        //here's a blogpost on it http://nottheinternet.com/blog/banging-things-in-Unity/
+        if (bangGetPoint)
+        {
+            debugPoints.Add(GetRandomPointOnMesh());
+            bangGetPoint = false;
+        }
+    }
+
+
+    public void OnDrawGizmos()
+    {
+        foreach (Vector3 debugPoint in debugPoints)
+        {
+            Gizmos.DrawSphere(debugPoint, 1f);
         }
     }
 
