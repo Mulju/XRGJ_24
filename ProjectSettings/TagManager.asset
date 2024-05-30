@@ -12,11 +12,11 @@ TagManager:
   - Water
   - UI
   - Grabbing
-  - Grabbable
   - Hand
+  - Restricted
+  - Player
+  - Grabbable
   - HandPlayer
-  - 
-  - 
   - 
   - 
   - 

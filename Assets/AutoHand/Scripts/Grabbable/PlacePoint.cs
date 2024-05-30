@@ -277,8 +277,12 @@ namespace Autohand {
 
         /// <summary>Whether or not the place point can accept an object based on its settings</summary>
         public virtual bool CanPlace(Grabbable placeObj, bool checkRoot = true) {
-            if(checkRoot && CanPlace(placeObj.rootGrabbable, false))
-                return true;
+
+            if (checkRoot && placeObj.rootGrabbable != placeObj)
+            {
+                if (CanPlace(placeObj.rootGrabbable, false))
+                    return true;
+            }
 
             if(placedObject != null) {
                 return false;
