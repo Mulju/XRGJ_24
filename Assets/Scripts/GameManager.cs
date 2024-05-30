@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         CastleHP -= newCastleHP;
     }
 
-    public void UpdateUI()
+    public void UpdateUI(int CastleHP, int Score, float ElapsedTime)
     {
         return;
     }
