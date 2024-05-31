@@ -58,9 +58,9 @@ public class GameManager : MonoBehaviour
         Score += newScore;
     }
 
-    public void UpdateCastleHP(int newCastleHP)
+    public void UpdateCastleHP(int damage)
     {
-        CastleHP -= newCastleHP;
+        CastleHP -= damage;
     }
 
     public void UpdateUI(int CastleHP, int Score, float ElapsedTime)
