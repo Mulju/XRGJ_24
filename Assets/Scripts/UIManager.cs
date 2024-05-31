@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake() => s_instance = this;
 
-    public static T GetView<T>() where T : UI
+    public static T GetUI<T>() where T : UI
     {
         for (int i = 0; i < s_instance._uis.Length; i++)
         {
