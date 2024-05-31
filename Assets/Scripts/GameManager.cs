@@ -41,11 +41,14 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Ongoing:
                 FeetSpawner.Instance.StartWaves();
+                UIManager.Show<HUDUI>();
                 break;
             case GameState.Victory:
+                UIManager.Show<EndMenuUI>();
                 EndGame(true);
                 break;
             case GameState.Lose:
+                UIManager.Show<EndMenuUI>();
                 EndGame(false);
                 break;
             default:
@@ -60,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         Score += newScore;
 
-        // Update the text field for score
+        UpdateUI(CastleHP, Score, ElapsedTime, false);
     }
 
     public void UpdateCastleHP(int damage)
@@ -72,17 +75,17 @@ public class GameManager : MonoBehaviour
             UpdateGameState(GameState.Lose);
         }
 
-        // Update the castle HP UI
+        UpdateUI(CastleHP, Score, ElapsedTime, false);
     }
 
-    public void UpdateUI(int CastleHP, int Score, float ElapsedTime)
+    public void UpdateUI(int CastleHP, int Score, float ElapsedTime, bool wonTheGame)
     {
-        return;
+        UIManager.GetUI<HUDUI>().UpdateUI(CastleHP, Score, ElapsedTime, wonTheGame);
     }
 
     private void EndGame(bool wonTheGame)
     {
-
+        UIManager.GetUI<EndMenuUI>().UpdateUI(CastleHP, Score, ElapsedTime, wonTheGame);
     }
 
     public enum GameState
