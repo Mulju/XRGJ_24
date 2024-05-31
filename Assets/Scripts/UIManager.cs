@@ -77,4 +77,19 @@ public class UIManager : MonoBehaviour
             Show(s_instance._history.Pop(), false);
         }
     }
+
+    private void Start()
+    {
+        for (int i = 0; 1 < _uis.Length; i++)
+        {
+            _uis[i].Initialize();
+
+            _uis[i].Hide();
+        }
+
+        if (_startingUI != null)
+        {
+            Show(_startingUI, true);
+        }
+    }
 }
