@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         {
             ElapsedTime += Time.deltaTime;
         }
+        UpdateUI(CastleHP, Score, ElapsedTime, false);
     }
 
     public void UpdateGameState(GameState newState)
@@ -41,14 +42,14 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Ongoing:
                 FeetSpawner.Instance.StartWaves();
-                UIManager.Show<HUDUI>();
+                UIManager.Show<HUDUI>(true);
                 break;
             case GameState.Victory:
-                UIManager.Show<EndMenuUI>();
+                UIManager.Show<EndMenuUI>(true);
                 EndGame(true);
                 break;
             case GameState.Lose:
-                UIManager.Show<EndMenuUI>();
+                UIManager.Show<EndMenuUI>(true);
                 EndGame(false);
                 break;
             default:
