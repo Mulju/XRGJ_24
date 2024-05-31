@@ -80,7 +80,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; 1 < _uis.Length; i++)
+        for (int i = 0; i < _uis.Length; i++)
         {
             _uis[i].Initialize();
 
