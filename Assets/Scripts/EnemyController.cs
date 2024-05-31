@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public Transform pointToGoTo;
+    private Transform pointToGoTo;
 
     public float enemySpeed = 3;
+
+    private void Start()
+    {
+        pointToGoTo = GameObject.FindGameObjectWithTag("Castle").transform;
+
+        transform.rotation = Quaternion.LookRotation(
+            Vector3.RotateTowards(
+                transform.forward,
+                pointToGoTo.position - transform.position,
+                360, 0.0f));
+
+    }
 
     private void Update()
     {

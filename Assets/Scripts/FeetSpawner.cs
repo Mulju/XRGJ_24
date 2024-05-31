@@ -21,6 +21,8 @@ public class FeetSpawner : MonoBehaviour
 
     private int spawnOverDuration = 10;
 
+    public bool test = false;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -36,6 +38,15 @@ public class FeetSpawner : MonoBehaviour
     private void Start()
     {
         spawner = spawnZone.GetComponent<RandomPointOnMesh>();
+    }
+
+    private void Update()
+    {
+        if(test)
+        {
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Ongoing);
+            test = false;
+        }
     }
 
     public void StartWaves()
