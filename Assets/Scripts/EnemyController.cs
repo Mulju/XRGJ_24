@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,6 +35,17 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void Die()
+    {
+        animator.SetBool("Dead", true);
+        DoWithDelay(2, DestroyThis);
+    }
+
+    private void DestroyThis()
+    {
+        Destroy(gameObject);
+    }
+
     private void DealDamage()
     {
         // Play hit animation and deal damage
@@ -53,16 +65,16 @@ public class EnemyController : MonoBehaviour
         if(other.CompareTag("Castle"))
         {
             castleReached = true;
-            StartCoroutine(DealPeriodicDamage());
+            StartCoroutine(DoWithDelay(1, DealDamage));
 
             animator.SetBool("MoveTowards", false);
-            Debug.Log("moi");
+            animator.SetBool("Attacking", true);
         }
     }
 
-    IEnumerator DealPeriodicDamage()
+    IEnumerator DoWithDelay(float delay, Action onComplete)
     {
-        yield return new WaitForSeconds(1);
-        DealDamage();
+        yield return new WaitForSeconds(delay);
+        onComplete();
     }
 }
