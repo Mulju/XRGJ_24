@@ -38,6 +38,9 @@ public class EnemyController : MonoBehaviour
     public void Die()
     {
         animator.SetBool("Dead", true);
+        FeetSpawner.Instance.OnEnemyKilled();
+        GameManager.Instance.UpdateScore(10);
+        StopAllCoroutines();
         DoWithDelay(2, DestroyThis);
     }
 
@@ -52,23 +55,24 @@ public class EnemyController : MonoBehaviour
         GameManager.Instance.UpdateCastleHP(1);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.collider.CompareTag("Castle"))
-        {
-            
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Castle"))
         {
             castleReached = true;
-            StartCoroutine(DoWithDelay(1, DealDamage));
+            StartCoroutine(DealPeriodicDamage());
 
             animator.SetBool("MoveTowards", false);
             animator.SetBool("Attacking", true);
+        }
+    }
+
+    IEnumerator DealPeriodicDamage()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(1);
+            DealDamage();
         }
     }
 
