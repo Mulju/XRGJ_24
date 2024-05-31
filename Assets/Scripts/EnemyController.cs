@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private GameObject collisionDetection;
 
+    private Animator animator;
 
     private Transform pointToGoTo;
     private bool castleReached = false;
@@ -15,6 +16,7 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         pointToGoTo = GameObject.FindGameObjectWithTag("Castle").transform;
+        animator = GetComponent<Animator>();
 
         transform.rotation = Quaternion.LookRotation(
             Vector3.RotateTowards(
@@ -28,7 +30,7 @@ public class EnemyController : MonoBehaviour
     {
         if (!castleReached)
         {
-            transform.position = Vector3.MoveTowards(transform.position, pointToGoTo.position, enemySpeed * Time.deltaTime);
+            //transform.position = Vector3.MoveTowards(transform.position, pointToGoTo.position, enemySpeed * Time.deltaTime);
         }
     }
 
@@ -52,6 +54,9 @@ public class EnemyController : MonoBehaviour
         {
             castleReached = true;
             StartCoroutine(DealPeriodicDamage());
+
+            animator.SetBool("MoveTowards", false);
+            Debug.Log("moi");
         }
     }
 
