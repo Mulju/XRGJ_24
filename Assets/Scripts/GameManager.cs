@@ -19,6 +19,11 @@ public class GameManager : MonoBehaviour
 
     public float ElapsedTime = 0.0f;
 
+    [SerializeField] private GameObject castlePart1;
+    [SerializeField] private GameObject castlePart2;
+    [SerializeField] private GameObject castlePart3;
+    [SerializeField] private GameObject castlePart4;
+
     private void Awake()
     {
         Instance = this;
@@ -71,9 +76,21 @@ public class GameManager : MonoBehaviour
     {
         CastleHP -= damage;
 
-        if(CastleHP <= 0)
+        switch(CastleHP)
         {
-            UpdateGameState(GameState.Lose);
+            case 0:
+                castlePart4.SetActive(false);
+                UpdateGameState(GameState.Lose);
+                break;
+            case 2:
+                castlePart3.SetActive(false);
+                break;
+            case 4:
+                castlePart2.SetActive(false);
+                break;
+            case 6:
+                castlePart1.SetActive(false);
+                break;
         }
 
         UpdateUI(CastleHP, Score, ElapsedTime, false);

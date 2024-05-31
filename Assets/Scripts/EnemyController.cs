@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,18 +35,24 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void Die()
+    {
+        animator.SetBool("Dead", true);
+        FeetSpawner.Instance.OnEnemyKilled();
+        GameManager.Instance.UpdateScore(10);
+        StopAllCoroutines();
+        DoWithDelay(2, DestroyThis);
+    }
+
+    private void DestroyThis()
+    {
+        Destroy(gameObject);
+    }
+
     private void DealDamage()
     {
         // Play hit animation and deal damage
         GameManager.Instance.UpdateCastleHP(1);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.collider.CompareTag("Castle"))
-        {
-            
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,13 +63,22 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(DealPeriodicDamage());
 
             animator.SetBool("MoveTowards", false);
-            Debug.Log("moi");
+            animator.SetBool("Attacking", true);
         }
     }
 
     IEnumerator DealPeriodicDamage()
     {
-        yield return new WaitForSeconds(1);
-        DealDamage();
+        while(true)
+        {
+            yield return new WaitForSeconds(1);
+            DealDamage();
+        }
+    }
+
+    IEnumerator DoWithDelay(float delay, Action onComplete)
+    {
+        yield return new WaitForSeconds(delay);
+        onComplete();
     }
 }
