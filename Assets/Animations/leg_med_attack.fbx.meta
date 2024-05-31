@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d4b727d71b31dc44198226fda8f73be7
+guid: 4d8d815134d62d7459eb261d4b228aae
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: empty
-      takeName: empty
-      internalID: 91990386462983916
+      name: attack
+      takeName: attack
+      internalID: -6239216113759591374
       firstFrame: 48
-      lastFrame: 63
+      lastFrame: 80
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -47,10 +47,10 @@ ModelImporter:
       loopTime: 1
       loopBlend: 1
       loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
+      keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
@@ -124,7 +124,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: c561a5a0ca9a89249a3914c242091296,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: e8d4edc6e0578e54ba1acefe82bbbafc,
     type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2

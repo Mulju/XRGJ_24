@@ -27,10 +27,12 @@ public class EndMenuUI : UI
         if (wonTheGame)
         {
             _victoryText.gameObject.SetActive(true);
+            _loseText.gameObject.SetActive(false);
         }
         else
         {
             _loseText.gameObject.SetActive(true);
+            _victoryText.gameObject.SetActive(false);
         }
     }
 }
