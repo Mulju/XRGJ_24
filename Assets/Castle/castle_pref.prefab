@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 8364033132569437240}
   m_Layer: 0
   m_Name: castle_pref
-  m_TagString: Untagged
+  m_TagString: Castle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
