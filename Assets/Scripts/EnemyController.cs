@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private Transform pointToGoTo;
-
     public float enemySpeed = 3;
+
+    [SerializeField] private GameObject collisionDetection;
+
+
+    private Transform pointToGoTo;
+    private bool castleReached = false;
 
     private void Start()
     {
@@ -22,15 +26,38 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, pointToGoTo.position, enemySpeed * Time.deltaTime);
+        if (!castleReached)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, pointToGoTo.position, enemySpeed * Time.deltaTime);
+        }
+    }
+
+    private void DealDamage()
+    {
+        // Play hit animation and deal damage
+        GameManager.Instance.UpdateCastleHP(1);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.CompareTag("Castle"))
         {
-            // Play hit animation and deal damage
-            GameManager.Instance.UpdateCastleHP(1);
+            
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Castle"))
+        {
+            castleReached = true;
+            StartCoroutine(DealPeriodicDamage());
+        }
+    }
+
+    IEnumerator DealPeriodicDamage()
+    {
+        yield return new WaitForSeconds(1);
+        DealDamage();
     }
 }
