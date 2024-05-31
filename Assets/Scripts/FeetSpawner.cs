@@ -55,7 +55,14 @@ public class FeetSpawner : MonoBehaviour
 
     private void WaveCleared()
     {
-        StartCoroutine(WaveCoolDown());
+        if(waveIndex ==  waves.Length - 1) 
+        {
+            GameManager.Instance.UpdateGameState(GameManager.GameState.Victory);
+        }
+        else
+        {
+            StartCoroutine(WaveCoolDown());
+        }
     }
 
     private void SpawnWave(int nmrOfEnemies)

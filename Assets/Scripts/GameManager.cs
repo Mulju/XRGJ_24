@@ -40,10 +40,13 @@ public class GameManager : MonoBehaviour
             case GameState.Start:
                 break;
             case GameState.Ongoing:
+                FeetSpawner.Instance.StartWaves();
                 break;
             case GameState.Victory:
+                EndGame(true);
                 break;
             case GameState.Lose:
+                EndGame(false);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -56,16 +59,30 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(int newScore)
     {
         Score += newScore;
+
+        // Update the text field for score
     }
 
     public void UpdateCastleHP(int damage)
     {
         CastleHP -= damage;
+
+        if(CastleHP <= 0)
+        {
+            UpdateGameState(GameState.Lose);
+        }
+
+        // Update the castle HP UI
     }
 
     public void UpdateUI(int CastleHP, int Score, float ElapsedTime)
     {
         return;
+    }
+
+    private void EndGame(bool wonTheGame)
+    {
+
     }
 
     public enum GameState
@@ -75,6 +92,4 @@ public class GameManager : MonoBehaviour
         Victory,
         Lose
     }
-
-
 }
