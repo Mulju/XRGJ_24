@@ -11,7 +11,7 @@ public class FeetSpawner : MonoBehaviour
     [SerializeField] private GameObject feetPrefab;
     [SerializeField] private GameObject spawnZone;
 
-    private RandomPointOnMesh spawner;
+    private RandomPointOnMesh pointRandomizer;
 
     private int[] waves = {10, 20, 30};
     private int waveIndex = 0;
@@ -37,7 +37,7 @@ public class FeetSpawner : MonoBehaviour
 
     private void Start()
     {
-        spawner = spawnZone.GetComponent<RandomPointOnMesh>();
+        pointRandomizer = spawnZone.GetComponent<RandomPointOnMesh>();
     }
 
     private void Update()
@@ -86,7 +86,7 @@ public class FeetSpawner : MonoBehaviour
     {
         while(spawnedDuringThisWave <= nmrOfEnemies)
         {
-            Instantiate(feetPrefab, spawner.GetRandomPointOnMesh(), Quaternion.identity);
+            Instantiate(feetPrefab, pointRandomizer.GetRandomPointOnMesh(), Quaternion.identity);
             spawnedDuringThisWave++;
 
             yield return new WaitForSeconds(spawnOverDuration / nmrOfEnemies);
